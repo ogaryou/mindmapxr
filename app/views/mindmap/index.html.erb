@@ -1,61 +1,37 @@
 <html>
   <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand">マインドマップ</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" id="navbarHistory" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            マップ
-          </a>
-          <div class="dropdown-menu" id="history" aria-labelledby="navbarHistory">
-            <a class="dropdown-item dropdownEditItem" href="#" id="btnHistory過去のマップ">過去のマップ</a>
-            <a class="dropdown-item dropdownEditItem" href="#" id="btnHistory新しいマップ">新しいマップ</a>
-          </div>
-        </li>
-      </ul>  
-    </div>
-  </nav>
-
       <div>
           <div style="float:left">
-              <textarea id="text" name="text" rows="50" cols="50" style ="background-color:lightgray;"></textarea>
+              <textarea id="text" name="text" rows="50" cols="50" style ="background-color:lightgray; "></textarea>
           </div>
           <div style="float:left;">
-            <svg id="map" width="700" height="500"></svg>
+            <svg id="map" width="700" height="500">
+              <rect x ="88.18" y="122.733" />
+            </svg>
           </div>
       </div>
      <script type="text/javascript"> 
 
     var svgNS = "http://www.w3.org/2000/svg";
     var htmlNS = "http://www.w3.org/1999/xhtml"
-
-    var inputText = "";
+    var writeText = "";
     $("#text").keyup(function(){
-        if(inputText != $("#text").val())
+        if(writeText !=$("#text").val())
         {
-            inputText = $("#text").val()
-            drawMap(inputText);
+            writeText = $("#text").val()
+            writeMap(writeText);
         }
     })
-
     var nodeWidth = 100;
     var nodeHeight = 50;
     var xMargin = 50;
     var yMargin = 20;
-
-    function drawMap(text)
+    
+    function writeMap(text)
     {
         $("#map").empty();
-
-        console.log(text)
         nodeArray = parseText(text);
         nodeArray = decideNodePosition(nodeArray);
-        console.log(nodeArray);
-
         for(var i = 0; i < nodeArray.length; i++)
         {
             drawSingleNode(nodeArray[i].text, nodeArray[i].x, nodeArray[i].y)
